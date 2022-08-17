@@ -10,6 +10,9 @@ const mongoose = require('mongoose');
 // Import du router sauce
 const sauceRoutes = require('./routes/sauce')
 
+//Import du router utilisateur
+const userRoutes = require('./routes/user');
+
 // Création de l'application express
 const app = express();
 
@@ -27,6 +30,7 @@ app.use(cors());
 
 //Utilisation du routeur
 app.use('/api/sauces', sauceRoutes);
+app.use('/api/auth', userRoutes);
 
 // Export de l'application express
 module.exports = app;

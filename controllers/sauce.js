@@ -3,10 +3,13 @@ const Sauce = require('../models/Sauce');
 
 //Export de la fonction de création de sauce
 exports.createSauce = (req, res) => {
+    const sauceObject = JSON.parse(req.body.sauce);
     delete req.body._id;
+    console.log (req.body);
     const sauce = new Sauce ({
-        ...req.body
+        ...sauceObject
     });
+    console.log(sauce)
     sauce.save()
     .then(() => res.status(201).json({ message: 'Sauce enregistrée !'}))
     .catch(error => res.status(400).json({ error }));
