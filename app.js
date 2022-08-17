@@ -1,11 +1,13 @@
 // Import d'Express
 const express = require('express');
 
-// Import du package CORS
-const cors = require('cors');
-
 // Import du package Mongoose pour faciliter les interactions avec la base de données MongoDB
 const mongoose = require('mongoose');
+
+const path = require('path');
+
+// Import du package CORS
+const cors = require('cors');
 
 // Import du router sauce
 const sauceRoutes = require('./routes/sauce')
@@ -29,8 +31,12 @@ app.use(express.json());
 app.use(cors());
 
 //Utilisation du routeur
+
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 
 // Export de l'application express
 module.exports = app;
