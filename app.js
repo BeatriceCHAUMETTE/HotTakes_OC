@@ -1,43 +1,44 @@
-// Import d'Express
+//Import d'Express
 const express = require('express');
 
-// Import du package Mongoose pour faciliter les interactions avec la base de données MongoDB
+//Import du package Mongoose pour faciliter les interactions avec la base de données MongoDB
 const mongoose = require('mongoose');
 
+//Import du path qui donne accès au système fichier
 const path = require('path');
 
-// Import du package CORS
+//Import du package CORS
 const cors = require('cors');
 
-// Import du router sauce
+//Import du router sauce
 const sauceRoutes = require('./routes/sauce')
 
 //Import du router utilisateur
 const userRoutes = require('./routes/user');
 
-// Création de l'application express
+//Lancement de l'application express
 const app = express();
 
-// Connexion à la base de données
+//Connexion à la base de données
 mongoose.connect('mongodb+srv://BCWebmaster:OCprojet6BC0822@piquante.nu9ofkm.mongodb.net/?retryWrites=true&w=majority',
     { useNewUrlParser: true, 
     useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-// Ajout middleware permettant d'analyser le corps des requêtes
+//Analyse et formatage du corps des requêtes
 app.use(express.json());
 
+//Correction des erreurs CORS
 app.use(cors());
 
-//Utilisation du routeur
-
+//Utilisation des routeurs
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 
+//Gestion du routage pour les images
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-
-// Export de l'application express
+//Export de l'application
 module.exports = app;
 
