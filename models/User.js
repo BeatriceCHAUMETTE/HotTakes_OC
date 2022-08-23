@@ -1,7 +1,7 @@
 //Import de Mongoose pour utilisation
 const mongoose = require('mongoose');
 
-//Ajout de unique validator pour éviter d'avoir plusieurs utilsateurs avec la même adresse mail
+//Ajout de unique validator pour éviter d'avoir plusieurs utilisateurs avec la même adresse mail
 const uniqueValidator = require('mongoose-unique-validator');
 
 //Création du schéma de données Utilisateur
