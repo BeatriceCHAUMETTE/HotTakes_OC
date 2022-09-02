@@ -4,6 +4,9 @@ const express = require('express');
 //Import du package Mongoose pour faciliter les interactions avec la base de données MongoDB
 const mongoose = require('mongoose');
 
+//Import du package dotenv pour accès aux variables d'environnement
+require('dotenv').config();
+
 //Import du path qui donne accès au système fichier
 const path = require('path');
 
@@ -20,7 +23,7 @@ const userRoutes = require('./routes/user');
 const app = express();
 
 //Connexion à la base de données
-mongoose.connect('mongodb+srv://BCWebmaster:OCprojet6BC0822@piquante.nu9ofkm.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@piquante.nu9ofkm.mongodb.net/?retryWrites=true&w=majority`,
     { useNewUrlParser: true, 
     useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))

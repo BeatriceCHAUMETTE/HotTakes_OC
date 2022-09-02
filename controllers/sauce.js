@@ -29,7 +29,6 @@ exports.likeSauce = (req, res) => {
         .then((sauce) => {
             //Ajout de l'id de l'user avec push au tableau des likes
             sauce.usersLiked.push(req.body.userId);
-            console.log(sauce.usersLiked)
             //Mise à jour des likes
             Sauce.updateOne({ _id: req.params.id }, { likes: sauce.likes+1, usersLiked: sauce.usersLiked })
             .then(() => res.status(201).json({ message: 'Like ajouté !' }))    
@@ -76,6 +75,7 @@ exports.likeSauce = (req, res) => {
 
 //Récupération d'une seule sauce
 exports.getOneSauce = (req, res) => {
+    console.log(req.auth.userId);
     Sauce.findOne({ _id: req.params.id })
     .then((sauce) => res.status(200).json(sauce))
     .catch(error => res.status(404).json({ error }));

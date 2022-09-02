@@ -7,6 +7,9 @@ const jwt = require('jsonwebtoken');
 //Import du modele de données User pour utilisation
 const User = require('../models/User');
 
+//Import du package dotenv pour accès aux variables d'environnement
+require('dotenv').config();
+
 //Création et enregistrement des nouveaux utilisateurs
 exports.signup = (req, res, next) => {
     //Hachage du mot de passe avec bcrypt
@@ -40,7 +43,7 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         token: jwt.sign(
                             { userId: user._id }, 
-                            'RANDOM_TOKEN_SECRET',
+                            process.env.TOKEN_AUTH,
                             { expiresIn: '24h'}
                         )
                     });
